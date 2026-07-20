@@ -1,0 +1,34 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Gotify",
+        "description": "Enter your Gotify server details. You need a client token (starts with C).",
+        "data": {
+          "url": "Server URL",
+          "token": "Client Token",
+          "verify_ssl": "Verify SSL certificate"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to Gotify server",
+      "invalid_auth": "Invalid client token",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "This Gotify server is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "max_messages": "Max stored messages",
+          "max_sensor_messages": "Max messages in sensor attributes",
+          "poll_interval": "REST fallback poll interval (seconds)"
+        }
+      }
+    }
+  }
+}

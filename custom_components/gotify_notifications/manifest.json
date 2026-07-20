@@ -1,0 +1,10 @@
+{
+  "domain": "gotify_notifications",
+  "name": "Gotify Notifications",
+  "codeowners": [],
+  "config_flow": true,
+  "documentation": "https://gotify.net/api-docs",
+  "iot_class": "cloud_push",
+  "version": "0.1.0",
+  "requirements": []
+}
