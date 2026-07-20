@@ -1,10 +1,12 @@
 {
   "domain": "gotify_notifications",
   "name": "Gotify Notifications",
-  "codeowners": [],
+  "codeowners": ["@phippsy22"],
   "config_flow": true,
-  "documentation": "https://gotify.net/api-docs",
+  "dependencies": ["frontend", "http"],
+  "documentation": "https://github.com/phippsy22/ha-gotify-sync",
   "iot_class": "cloud_push",
-  "version": "0.1.0",
-  "requirements": []
+  "issue_tracker": "https://github.com/phippsy22/ha-gotify-sync/issues",
+  "requirements": [],
+  "version": "1.0.0"
 }

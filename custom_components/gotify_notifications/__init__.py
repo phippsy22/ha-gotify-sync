@@ -9,7 +9,8 @@ import voluptuous as vol
 
 from homeassistant.components import websocket_api
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.const import EVENT_HOMEASSISTANT_STARTED
+from homeassistant.core import CoreState, HomeAssistant, callback
 from homeassistant.exceptions import ConfigEntryAuthFailed, ConfigEntryNotReady
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.storage import Store
@@ -27,6 +28,7 @@ from .const import (
     WS_TYPE_GET_MESSAGES,
 )
 from .coordinator import GotifyCoordinator
+from .frontend import GotifyCardRegistration
 from .store import GotifyMessageStore
 
 _LOGGER = logging.getLogger(__name__)
@@ -108,6 +110,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     coordinator.async_add_listener(_persist_on_message)
 
     entry.async_on_unload(entry.add_update_listener(_async_update_listener))
+
+    # Register frontend card
+    async def _setup_frontend(_event=None) -> None:
+        registrar = GotifyCardRegistration(hass, version="1.0.0")
+        await registrar.async_register()
+
+    if hass.state == CoreState.running:
+        await _setup_frontend()
+    else:
+        hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STARTED, _setup_frontend)
 
     return True
 
